@@ -22,6 +22,7 @@
     "README.md"
   ],
   "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
     "prepare": "node ../../../scripts/prepare.js"
   },
@@ -34,10 +35,14 @@
   },
   "peerDependencies": {
     "@storybook/addon-storyshots": "5.2.0-beta.13",
+    "@types/puppeteer": "^1.19.0",
+    "@types/jest-image-snapshot": "^2.8.0",
     "puppeteer": "^1.12.2"
   },
   "optionalDependencies": {
-    "puppeteer": "^1.12.2"
+    "puppeteer": "^1.12.2",
+    "@types/puppeteer": "^1.19.0",
+    "@types/jest-image-snapshot": "^2.8.0"
   },
   "publishConfig": {
     "access": "public"

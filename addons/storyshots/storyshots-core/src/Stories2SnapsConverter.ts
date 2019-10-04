@@ -1,4 +1,5 @@
 import path from 'path';
+import dedent from 'ts-dedent';
 
 const defaultOptions: Stories2SnapsConverterOptions = {
   snapshotsDirName: '__snapshots__',
@@ -31,10 +32,21 @@ export class Stories2SnapsConverter {
     return path.format({ dir: path.join(dir, snapshotsDirName), name, ext: snapshotExtension });
   }
 
-  getSnapshotFileName(context: { fileName?: string }) {
-    const { fileName } = context;
+  getSnapshotFileName(context: { fileName?: string; kind?: string }) {
+    const { fileName, kind } = context;
 
     if (!fileName) {
+      // eslint-disable-next-line no-console
+      console.warn(
+        dedent`
+          Storybook was unable to detect filename for stories of kind "${kind}".
+          To fix it, add following to your jest.config.js:
+            transform: {
+              // should be above any other js transform like babel-jest
+              '^.+\\\\.stories\\\\.js$': '@storybook/addon-storyshots/injectFileName',
+            }
+        `
+      );
       return null;
     }
 
